@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('../db/conn')
 const { Schema } = mongoose
 
 const User = mongoose.model(
@@ -27,3 +27,5 @@ const User = mongoose.model(
         { timestamps: true },
     )
 )
+
+module.exports = User
