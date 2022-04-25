@@ -9,7 +9,9 @@ const checkToken = (req, res, next) => {
         return res.status(401).json({ message: 'Acesso negado!' })
     }
 
+
     const token = getToken(req)
+
 
     if (!token) {
         return res.status(401).json({ message: 'Acesso negado!' })

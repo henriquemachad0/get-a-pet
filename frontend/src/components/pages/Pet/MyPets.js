@@ -1,4 +1,3 @@
-
 import api from '../../../utils/api'
 
 import styles from './Dashboard.module.css'
@@ -37,7 +36,7 @@ function MyPets() {
                 Authorization: `Bearer ${JSON.parse(token)}`
             }
         }).then((response) => {
-            const updatedPets = pets.filter((pet) => pet._id != id)
+            const updatedPets = pets.filter((pet) => pet._id !== id)
             setPets(updatedPets)
             return response.data
         }).catch((error) => {
@@ -48,10 +47,14 @@ function MyPets() {
         setFlashMessage(data.message, msgType)
     }
 
+    async function concludeAdoption(id){
+
+    }
+
     return (
         <section >
             <div className={styles.petlist_header}>
-                <h1>MyPets</h1>
+                <h1>Meus Pets</h1>
                 <Link to='/pet/add'>Cadastrar pet</Link>
             </div>
             <div className={styles.petlist_container}>
@@ -69,11 +72,15 @@ function MyPets() {
                                     (
                                         <>
                                             {pet.adopter && (
-                                                <button className={styles.conclude_btn}>Concluir adoção</button>
+                                                <button className={styles.conclude_btn} onClick={() => {
+                                                    concludeAdoption(pet._id)
+                                                }}>
+                                                    Concluir adoção
+                                                    </button>
                                             )}
                                             <Link to={`/pet/edit/${pet._id}`}>Editar</Link>
                                             <button onClick={() => {
-                                                removePet(pet._id)    
+                                                removePet(pet._id)
                                             }}>Excluir</button>
                                         </>
                                     )

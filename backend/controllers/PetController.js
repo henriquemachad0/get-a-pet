@@ -218,10 +218,7 @@ module.exports = class PetController {
             udpatedData.color = color
         }
 
-        if (images.length === 0) {
-            res.status(422).json({ message: "A imagem é obrigatória!" })
-            return
-        } else {
+        if (images.length > 0) {
             udpatedData.images = []
             images.map((image) => {
                 udpatedData.images.push(image.filename)
