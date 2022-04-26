@@ -7,7 +7,6 @@ import useFlashMessage from './useFlashMessage'
 
 export default function useAuth() {
     const [authenticated, setAuthenticated] = useState(false)
-    const [loading, setLoading] = useState(true)
     const navigate = useNavigate()
     const { setFlashMessage } = useFlashMessage()
 
@@ -19,7 +18,6 @@ export default function useAuth() {
             setAuthenticated(true)
         }
 
-        setLoading(false)
     }, [])
 
     async function register(user) {
@@ -83,5 +81,5 @@ export default function useAuth() {
         setFlashMessage(msgText, msgType)
     }
 
-    return { authenticated, loading, register, logout, login }
+    return { authenticated, register, logout, login }
 }
