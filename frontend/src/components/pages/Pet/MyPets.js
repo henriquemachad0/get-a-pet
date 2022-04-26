@@ -13,7 +13,7 @@ import useFlashMessage from '../../../hooks/useFlashMessage'
 
 function MyPets() {
     const [pets, setPets] = useState([])
-    const [token] = useState(localStorage.getItem(('token') || ''))
+    const [token] = useState(localStorage.getItem('token') || '')
     const { setFlashMessage } = useFlashMessage()
 
     useEffect(() => {
@@ -48,7 +48,20 @@ function MyPets() {
     }
 
     async function concludeAdoption(id){
+        let msgType = 'success'
 
+        const data = await api.patch(`/pets/conclude/${id}`, {
+            headers: {
+                Authorization: `Bearer ${JSON.parse(token)}`
+            },
+        }).then((response) => {
+            return response.data
+        }).catch((error) => {
+            msgType = 'error'
+            return error.response.data
+        })
+
+        setFlashMessage(data.message, msgType)
     }
 
     return (

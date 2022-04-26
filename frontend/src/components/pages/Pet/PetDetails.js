@@ -21,14 +21,16 @@ function PetDetails() {
         })
     }, [id])
 
-    async function schedule(){
-
+    async function schedule() {
         let msgType = 'success'
 
         const data = await api.patch(`pets/schedule/${pet._id}`, {
-            Authorization: `Bearer ${JSON.parse(token)}`
-        }).then((response) =>{
+            headers:{
+                Authorization: `Bearer ${JSON.parse(token)}`
+            }
+        }).then((response) => {
             return response.data
+
         }).catch((error) => {
             msgType = 'error'
             return error.response.data
@@ -60,9 +62,9 @@ function PetDetails() {
                     <p>
                         <span className='bold'>Idade:</span> {pet.age} anos
                     </p>
-                    {token 
-                    ? (<button onClick={schedule}>Solicitar uma visita</button>) 
-                    : (<p>Você precisa <Link to="/register">criar uma conta</Link> para solicitar a visita</p>)}
+                    {token
+                        ? (<button onClick={schedule}>Solicitar uma visita</button>)
+                        : (<p>Você precisa <Link to="/register">criar uma conta</Link> para solicitar a visita</p>)}
                 </section>
             )}
         </>

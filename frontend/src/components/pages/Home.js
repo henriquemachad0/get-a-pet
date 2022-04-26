@@ -12,7 +12,6 @@ function Home() {
 
         api.get('/pets').then((response) => {
             setPets(response.data.pets)
-            // console.log(pets)
         })
 
     }, [])

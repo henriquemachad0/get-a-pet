@@ -16,7 +16,7 @@ function AddPet() {
     const { setFlashMessage } = useFlashMessage()
     const navigate = useNavigate()
 
-    
+
 
     async function registerPet(pet) {
         let msgType = 'success'
@@ -32,16 +32,22 @@ function AddPet() {
                 formData.append(key, pet[key])
             }
         })
+
+
         const data = await api.post('pets/create', formData, {
-            Authorization: `Bearer ${JSON.parse(token)}`,
-            'Content-Type': 'multipar/form-data'
+             headers:{
+                Authorization: `Bearer ${JSON.parse(token)}`,
+                'Content-Type': 'multipart/form-data'
+            }
         })
-            .then((response) => {
-                return response.data
-            }).catch((error) => {
-                msgType = 'error'
-                return error.response.data
-            })
+        .then((response) => {
+            return response.data
+
+        }).catch((error) => {
+            msgType = 'error'
+            return error.response.data
+        })
+
 
         setFlashMessage(data.message, msgType)
 

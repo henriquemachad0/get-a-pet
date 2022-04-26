@@ -19,7 +19,7 @@ function Login() {
     }
 
     function handleSubmit(e){
-        e.preventDefault()
+        e.preventDefault(e)
         login(user)
     }
 
